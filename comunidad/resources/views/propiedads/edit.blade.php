@@ -1,0 +1,37 @@
+@extends('plantilla.plantilla1')
+@section('titulo')
+editar propiedad
+@endsection
+@section('cabecera')
+Editar Propiedad
+@endsection
+@section('contenido')
+@if ($errors->any())
+    <div class="alert alert-danger my-3 p-2">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form name="fom" action="{{route('Propiedad.update', $propiedad)}}" method="POST" enctype="multipart/form-data" class="mt-3">
+    @csrf
+    @method("PUT")
+<div class="row">
+    <div class="col-2">
+        <input type="text" name="nombre" required value="{{$propiedad->nombre}}" class="form-control">
+    </div>
+    <div class="col-2">
+        <input type="text" name="piso" required value="{{$propiedad->piso}}" class="form-control">
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Editar Marca</button>
+        <button type="reset" class="btn btn-warning"><i class="fa fa-brush"></i> Limpiar</button>
+        <a href="{{route('Propiedad.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Inicio</a>
+    </div>
+</div>
+</form>
+@endsection
